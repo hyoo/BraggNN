@@ -80,6 +80,8 @@ def train(args: argparse.Namespace, model: nn.Module, optimizer: samba.optim.SGD
         X_mb_val, y_mb_val = get1batch4test(psz=args.psz, mb_size=6144, rnd_shift=0, dev=None)
         _y_mb_val = torch.from_numpy(y_mb_val)
 
+      print('[Info] @ %.1f Epoch: %05d, elapse: %.2fs/itr' % (time.time(), epoch, (time.time() - time_it_st), ))
+
       samba.session.to_cpu(model)
       with torch.no_grad():
         _, pred_val = model(X_mb_val, _y_mb_val)
